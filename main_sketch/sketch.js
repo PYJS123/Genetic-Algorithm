@@ -54,7 +54,8 @@ function draw() {
   if (counter == limit) {
     mPool = [];
     for (let i = 0; i < bubbles.length; i++) {
-      for (let j = 0; j < maxDist - dist(bubbles[i].x, bubbles[i].y, goal.x, goal.y); j++) {
+      let temp = dist(bubbles[i].x, bubbles[i].y, goal.x, goal.y);
+      for (let j = 0; j < map(temp, 0, maxDist, 50, 0); j++) {
         mPool.push(bubbles[i].dirs);
       }
     }
