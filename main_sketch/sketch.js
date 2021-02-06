@@ -43,16 +43,24 @@ function draw() {
       bubbles[i].show();
     }
   }
-  
+
   fill(0, 255, 0, 70);
   stroke(0, 255, 0, 150);
   circle(goal.x, goal.y, goal.r);
-  
-  if (limit == counter) {
+
+  if (counter == limit) {
     mPool = [];
     for (let i = 0; i < bubbles.length; i++) {
       for (let j = 0; j < 600 - dist(bubbles[i].x, bubbles[i].y, goal.x, goal.y); j++) {
-        mPool.push(bubbles[i].dirs)
+        mPool.push(bubbles[i].dirs);
+      }
+    }
+
+    for (let i = 0; i < bubbles.length; i++) {
+      let parent1 = mPool[floor(random(mPool.length - 1))];
+      let parent2 = mPool[floor(random(mPool.length - 1))];
+      for (let j = 0; j < bubbles[i].dirs.length; j++) {
+        bubbles[i].dirs[j] = lerp(parent1[j], parent2[j], random(1));
       }
     }
   }
