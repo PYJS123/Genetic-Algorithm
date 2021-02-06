@@ -7,6 +7,8 @@ let bubbles = [];
 
 let mPool = [];
 
+let maxDist;
+
 function setup() {
   createCanvas(600, 400);
   goal = {
@@ -14,6 +16,7 @@ function setup() {
     y: height / 2,
     r: 40
   };
+  maxDist = dist(goal.x, goal.y, 0, 0);
   for (let i = 0; i < 15; i++) {
     let tempLS = [];
     for (let i = 0; i < limit; i++) {
@@ -51,7 +54,7 @@ function draw() {
   if (counter == limit) {
     mPool = [];
     for (let i = 0; i < bubbles.length; i++) {
-      for (let j = 0; j < 600 - dist(bubbles[i].x, bubbles[i].y, goal.x, goal.y); j++) {
+      for (let j = 0; j < maxDist - dist(bubbles[i].x, bubbles[i].y, goal.x, goal.y); j++) {
         mPool.push(bubbles[i].dirs);
       }
     }
